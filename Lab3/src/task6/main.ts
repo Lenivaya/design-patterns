@@ -1,11 +1,10 @@
 import {
   LightElementNode,
-  LightTextNode,
   LightElementNodeArguments,
-  ILightElementNodeArguments
+  LightTextNode
 } from '@/task5/index.js'
-import { isSome } from '@/lib/utils.js'
 import { readFile, writeFile } from 'fs/promises'
+import { FlyweightElementNodeArgumentsFactory } from '@/task6/implementations/index.js'
 
 // import { writeHeapSnapshot } from 'v8'
 
@@ -46,56 +45,6 @@ import { readFile, writeFile } from 'fs/promises'
 //   console.error('Error:', error)
 // }
 
-interface IFlyweight<TFlyweight, TFlyWeightStateArgs> {
-  cacheSize: number
-
-  getCacheKey(args: TFlyWeightStateArgs): string
-
-  getFlyweight(args: TFlyWeightStateArgs): TFlyweight
-}
-
-class FlyweightLightElementNodeArgumentsFactory
-  implements IFlyweight<ILightElementNodeArguments, ILightElementNodeArguments>
-{
-  private flyweightsCache: Map<string, ILightElementNodeArguments> = new Map()
-
-  constructor(initialFlyweights?: ILightElementNodeArguments[]) {
-    if (isSome(initialFlyweights)) {
-      for (const initialFlyweight of initialFlyweights) {
-        this.flyweightsCache.set(
-          this.getCacheKey(initialFlyweight),
-          initialFlyweight
-        )
-      }
-    }
-  }
-
-  getCacheKey(args: ILightElementNodeArguments): string {
-    return `${args.tagName}-${args.selfClosing}-${args.displayType}-${args.classes.join('-')}`
-  }
-
-  getFlyweight(args: ILightElementNodeArguments): ILightElementNodeArguments {
-    const cacheKey = this.getCacheKey(args)
-
-    if (!this.flyweightsCache.has(cacheKey))
-      this.flyweightsCache.set(
-        cacheKey,
-        new LightElementNodeArguments(
-          args.tagName,
-          args.selfClosing,
-          args.displayType,
-          args.classes
-        )
-      )
-
-    return this.flyweightsCache.get(cacheKey) as ILightElementNodeArguments
-  }
-
-  get cacheSize() {
-    return this.flyweightsCache.size
-  }
-}
-
 try {
   const bookContents = await readFile('src/task6/pg1513.txt', 'utf-8')
   const lines = bookContents.split('\n')
@@ -104,7 +53,7 @@ try {
     new LightElementNodeArguments('div', false, 'block', ['container'])
   )
 
-  const argumentsFactory = new FlyweightLightElementNodeArgumentsFactory()
+  const argumentsFactory = new FlyweightElementNodeArgumentsFactory()
 
   lines.forEach((line, idx) => {
     let args: LightElementNodeArguments

@@ -9,15 +9,3 @@ export abstract class HeroDecorator implements IHero {
     this.inventory = this.hero.inventory
   }
 }
-
-export class ArmorDecorator extends HeroDecorator {
-  inventory = [...this.hero.inventory, 'Armor']
-}
-
-export class WeaponDecorator extends HeroDecorator {
-  inventory = [...this.hero.inventory, 'Weapon']
-}
-
-export class ArtifactDecorator extends HeroDecorator {
-  inventory = [...this.hero.inventory, 'Artifact']
-}

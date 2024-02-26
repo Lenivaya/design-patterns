@@ -1,3 +1,6 @@
 export * from './shapes.js'
 export * from './rasterRenderer.js'
 export * from './vectorRenderer.js'
+export { Circle } from '@/task3/implementations/circle.js'
+export { Square } from '@/task3/implementations/square.js'
+export { Triangle } from '@/task3/implementations/triangle.js'
