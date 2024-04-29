@@ -1,9 +1,11 @@
 import {
+  BreadthFirstLightElementNodesIterator,
+  DeepFirstLightElementNodesIterator,
   LightElementNode,
   LightElementNodeArguments,
   LightTextNode
-} from '@/implementations/index.js'
-import { PageRenderer } from '@/implementations/pageRenderer'
+} from '@/implementations'
+import chalk from 'chalk'
 
 const separator = new LightElementNode(
   new LightElementNodeArguments('hr', true)
@@ -38,6 +40,26 @@ list.addEventListener('click', () => {
   alert('List clicked')
 })
 
-const pageRenderer = new PageRenderer(pageContainer, 'LightHTML test')
+// const pageRenderer = new PageRenderer(pageContainer, 'LightHTML test')
+// console.log(pageRenderer.render())
 
-console.log(pageRenderer.render())
+// Testing
+
+const showHeader = (text: string) =>
+  console.log(`\n\n${chalk.bold.redBright(text)}\n`)
+
+// Testing iterators
+console.log('Testing iterators')
+
+showHeader('Breadth first iterator')
+for (const node of new BreadthFirstLightElementNodesIterator([
+  header,
+  separator
+])) {
+  console.log(node)
+}
+
+showHeader('Deep first iterator')
+for (const node of new DeepFirstLightElementNodesIterator([list])) {
+  console.log(node)
+}

@@ -1,2 +1,3 @@
-export * from './implementations/index.js'
-export * from './interfaces/index.js'
+export * from './implementations'
+export * from './interfaces'
+export * from './lib'
