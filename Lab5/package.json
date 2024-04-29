@@ -1,0 +1,30 @@
+{
+  "name": "lab-5",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "code:run": "tsx src/main.ts",
+    "code:format": "prettier --write src",
+    "code:barrels": "ctix build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@types/uuid": "^9.0.8",
+    "ctix": "^2.4.1",
+    "prettier": "^3.2.5",
+    "prettier-config-standard": "^7.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "uuid": "^9.0.1"
+  },
+  "packageManager": "pnpm@8.15.5+sha256.4b4efa12490e5055d59b9b9fc9438b7d581a6b7af3b5675eb5c5f447cee1a589"
+}
