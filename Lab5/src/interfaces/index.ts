@@ -1,2 +1,5 @@
+export * from './ICommand'
 export * from './ILightElementNodeArguments'
 export * from './ILightNode'
+export * from './IUndoable'
+export * from './IUndoableCommand'

@@ -23,3 +23,13 @@ Breadth iterator (goes through given list of nodes directly):
 Deep iterator (recursively iterates over nodes children):
 
 ![](.images/iterator_deep.png)
+
+## Command
+
+Executing commands to add new class and new child for the header node:
+
+![](.images/command_execution.png)
+
+Undoing changes introduced by commands:
+
+![](.images/command_undoing.png)
