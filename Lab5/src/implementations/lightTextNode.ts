@@ -5,6 +5,7 @@ export class LightTextNode extends LightNode {
     super()
   }
 
-  render = () => this.text
+  renderTag = (_classes: string): string => this.text
   generateScript = (): string => ''
+  renderClasses = (): string => ''
 }

@@ -16,17 +16,19 @@ export class LightElementNode extends LightNode {
   removeChild = (child: ILightNode) =>
     (this.children = this.children.filter((c) => c !== child))
 
-  render(): string {
-    const { tagName, selfClosing, displayType, classes, id } = this.args
+  renderClasses(): string {
+    const { classes } = this.args
+    return classes.length > 0 ? `class="${classes.join(' ')}"` : ''
+  }
 
-    const classAttribute =
-      classes.length > 0 ? `class="${classes.join(' ')}"` : ''
+  renderTag(classes: string): string {
+    const { tagName, selfClosing, displayType, id } = this.args
 
-    let result = `<${tagName} ${classAttribute} id="${id}" style="display: ${displayType};"`
+    let result = `<${tagName} ${classes} id="${id}" style="display: ${displayType};"`
 
     if (!selfClosing) {
       result += `>`
-      result += this.children.map((child) => child.render()).join('')
+      result += this.children.map((child) => child.render().html).join('')
       result += `</${tagName}>`
     } else result += `/>`
 

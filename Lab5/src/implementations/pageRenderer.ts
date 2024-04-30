@@ -8,16 +8,18 @@ export class PageRenderer {
   ) {}
 
   render() {
+    const { html, script } = this.entrypointElement.render()
+
     return `
       <html lang="${this.lang}">
         <head>
             <title>${this.title}</title>
         </head>
         <body>
-          ${this.entrypointElement.render()}
+          ${html}
           
           <script async defer>
-              ${this.entrypointElement.generateScript()}
+              ${script}
           </script>
         </body>
       </html>

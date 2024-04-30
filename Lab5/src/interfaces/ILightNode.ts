@@ -1,5 +1,7 @@
+import { ILightElementNodeRenderResult } from '@/interfaces'
+
 export interface ILightNode {
-  render(): string
+  render(): ILightElementNodeRenderResult
 
   generateScript(): string
 }

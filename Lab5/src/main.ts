@@ -5,7 +5,9 @@ import {
   DeepFirstLightElementNodesIterator,
   LightElementNode,
   LightElementNodeArguments,
-  LightTextNode
+  LightTextNode,
+  PageRenderer,
+  LightElementNodeWithLoggingOfSteps
 } from '@/implementations'
 import { IUndoableCommand } from '@/interfaces'
 import chalk from 'chalk'
@@ -44,8 +46,8 @@ list.addEventListener('click', () => {
   alert('List clicked')
 })
 
-// const pageRenderer = new PageRenderer(pageContainer, 'LightHTML test')
-// console.log(pageRenderer.render())
+const pageRenderer = new PageRenderer(pageContainer, 'LightHTML test')
+console.log(pageRenderer.render())
 
 // Testing
 
@@ -87,3 +89,11 @@ console.log(header)
 showHeader('Header after undoing commands:')
 commands.forEach((command) => command.undo())
 console.log(header)
+
+// Testing template method
+// (hooks must show output on different steps of element creation)
+showHeader('Testing template method:')
+const someElementWithLogging = new LightElementNodeWithLoggingOfSteps(
+  new LightElementNodeArguments('div', false, 'block', ['testing-element'])
+)
+someElementWithLogging.render()

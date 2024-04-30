@@ -33,3 +33,7 @@ Executing commands to add new class and new child for the header node:
 Undoing changes introduced by commands:
 
 ![](.images/command_undoing.png)
+
+## Template method
+
+![](.images/template_method.png)
