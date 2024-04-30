@@ -5,9 +5,10 @@ import {
   DeepFirstLightElementNodesIterator,
   LightElementNode,
   LightElementNodeArguments,
+  LightElementNodeWithLoggingOfSteps,
   LightTextNode,
   PageRenderer,
-  LightElementNodeWithLoggingOfSteps
+  NodeLogger
 } from '@/implementations'
 import { IUndoableCommand } from '@/interfaces'
 import chalk from 'chalk'
@@ -97,3 +98,9 @@ const someElementWithLogging = new LightElementNodeWithLoggingOfSteps(
   new LightElementNodeArguments('div', false, 'block', ['testing-element'])
 )
 someElementWithLogging.render()
+
+// Testing visitor
+showHeader('Testing visitor:')
+const nodeLogger = new NodeLogger()
+const nodes = [header, new LightTextNode('Testing visitor')]
+nodes.forEach((node) => node.accept(nodeLogger))

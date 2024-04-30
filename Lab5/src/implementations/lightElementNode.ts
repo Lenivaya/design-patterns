@@ -1,9 +1,14 @@
-import { LightNode } from '@/implementations/lightNode.js'
-import { ILightElementNodeArguments, ILightNode } from '@/interfaces/index.js'
+import { LightNode } from '@/implementations/lightNode'
+import {
+  ILightElementNodeArguments,
+  ILightNode,
+  IVisitable,
+  IVisitor
+} from '@/interfaces'
 
 export type EventListenerCallback = () => void
 
-export class LightElementNode extends LightNode {
+export class LightElementNode extends LightNode implements IVisitable {
   public children: ILightNode[] = []
   private eventListeners: Map<string, EventListenerCallback[]> = new Map()
 
@@ -15,6 +20,10 @@ export class LightElementNode extends LightNode {
   addChildren = (children: ILightNode[]) => this.children.push(...children)
   removeChild = (child: ILightNode) =>
     (this.children = this.children.filter((c) => c !== child))
+
+  accept(visitor: IVisitor): void {
+    return visitor.visit(this)
+  }
 
   renderClasses(): string {
     const { classes } = this.args
@@ -46,8 +55,8 @@ export class LightElementNode extends LightNode {
     return script
   }
 
-  outerHTML = () => this.render()
-  innerHTML = () => this.children.map((child) => child.render()).join('')
+  outerHTML = () => this.render().html
+  innerHTML = () => this.children.map((child) => child.render().html).join('')
 
   addEventListener(event: string, callback: EventListenerCallback) {
     if (!this.eventListeners.has(event)) this.eventListeners.set(event, [])
