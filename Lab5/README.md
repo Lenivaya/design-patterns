@@ -37,3 +37,7 @@ Undoing changes introduced by commands:
 ## Template method
 
 ![](.images/template_method.png)
+
+## Visitor
+
+![](.images/visitor.png)
