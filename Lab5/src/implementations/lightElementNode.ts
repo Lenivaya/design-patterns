@@ -13,6 +13,8 @@ export class LightElementNode extends LightNode {
 
   addChild = (child: ILightNode) => this.children.push(child)
   addChildren = (children: ILightNode[]) => this.children.push(...children)
+  removeChild = (child: ILightNode) =>
+    (this.children = this.children.filter((c) => c !== child))
 
   render(): string {
     const { tagName, selfClosing, displayType, classes, id } = this.args

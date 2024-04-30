@@ -1,10 +1,13 @@
 import {
+  AddChildCommand,
+  AddClassCommand,
   BreadthFirstLightElementNodesIterator,
   DeepFirstLightElementNodesIterator,
   LightElementNode,
   LightElementNodeArguments,
   LightTextNode
 } from '@/implementations'
+import { IUndoableCommand } from '@/interfaces'
 import chalk from 'chalk'
 
 const separator = new LightElementNode(
@@ -13,9 +16,10 @@ const separator = new LightElementNode(
 const pageContainer = new LightElementNode(
   new LightElementNodeArguments('div', false, 'block', ['container'])
 )
-const header = new LightElementNode(
-  new LightElementNodeArguments('h1', false, 'block', ['header'])
-)
+const headerArgs = new LightElementNodeArguments('h1', false, 'block', [
+  'header'
+])
+const header = new LightElementNode(headerArgs)
 
 header.addChild(new LightTextNode('Using LightHTML'))
 
@@ -63,3 +67,23 @@ showHeader('Deep first iterator')
 for (const node of new DeepFirstLightElementNodesIterator([list])) {
   console.log(node)
 }
+
+// Testing commands
+const commands: IUndoableCommand[] = [
+  new AddClassCommand(headerArgs, 'class-added-with-command'),
+  new AddChildCommand(
+    header,
+    new LightTextNode('New text node added with command')
+  )
+]
+
+showHeader('Header before running commands:')
+console.log(header)
+
+showHeader('Header after running commands:')
+commands.forEach((command) => command.execute())
+console.log(header)
+
+showHeader('Header after undoing commands:')
+commands.forEach((command) => command.undo())
+console.log(header)
