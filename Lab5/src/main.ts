@@ -7,8 +7,9 @@ import {
   LightElementNodeArguments,
   LightElementNodeWithLoggingOfSteps,
   LightTextNode,
-  PageRenderer,
-  NodeLogger
+  NodeCreatedState,
+  NodeLogger,
+  PageRenderer
 } from '@/implementations'
 import { IUndoableCommand } from '@/interfaces'
 import chalk from 'chalk'
@@ -104,3 +105,19 @@ showHeader('Testing visitor:')
 const nodeLogger = new NodeLogger()
 const nodes = [header, new LightTextNode('Testing visitor')]
 nodes.forEach((node) => node.accept(nodeLogger))
+
+// Testing state
+showHeader('Testing state:')
+const someElement = new LightElementNode(
+  new LightElementNodeArguments('div', false, 'block', ['testing-state'])
+)
+
+console.log('\nTrying to clear not rendered node:')
+someElement.state.clear()
+console.log('')
+
+someElement.state.render()
+
+console.log('\nTrying to render already rendered node:')
+someElement.state.render()
+console.log('')

@@ -41,3 +41,11 @@ Undoing changes introduced by commands:
 ## Visitor
 
 ![](.images/visitor.png)
+
+## State
+
+![](.images/state_1.png)
+
+Also with template method:
+
+![](.images/state_2.png)
